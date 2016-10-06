@@ -5,6 +5,7 @@ import java.util.*;
 public class Facebook {
 	
 	private List<Utente> registrati = new ArrayList<Utente>();
+	private Map<String, Gruppo> gruppi = new TreeMap<String, Gruppo>();
 	
 	public Facebook (){};
 	
@@ -118,10 +119,15 @@ public class Facebook {
 		}
 
 	public void creaGruppo (String nome, Utente u){
-		
+		if(!gruppi.containsKey(nome)){
+			Gruppo g = new Gruppo(nome);
+			g.aggiungiUtente(u);
+			gruppi.put(nome, g);		
+		}
+		else{
+			gruppi.get(nome).getMembri().add(u);
+		}
 	} 
-	
-	
 	
 	public String listToString(List<Utente> lista){
 		String str = "";
